@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui" />
+        <meta charset="utf-8">
+        <title>responsivelyLazy demo</title>
+        <meta name="description" content="responsivelyLazy demo">
+        <meta name="author" content="ivopetkov.com">
+        <link rel="stylesheet" href="responsivelyLazy.min.css">
+        <style>
+            body{
+                padding: 30px;
+                padding-bottom: 0;
+                line-height: 180%;
+                background-color:#f5f5f5;
+            }
+            .example-title{
+                text-align: center;
+                font-family: Arial;
+                padding: 10px;
+                font-size: 15px;
+            }
+            .example-image{
+                border: 1px solid #ccc;
+                background-color: #fff;
+                padding: 5px;
+                margin: 0 auto;
+                margin-bottom: 30px;
+                border-radius: 2px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1 style="text-align: center; font-size: 50px; line-height:80px; padding-bottom: 30px;">Lazy load
+            <br/>responsive images
+            <br/>demo</h1>
+        <div style="max-width:600px; margin:0 auto; text-align:center; font-family: Arial; padding-bottom:60px; font-size: 15px;">Article:
+            <a style="color:#000;text-decoration:underline;" href="http://ivopetkov.com/b/lazy-load-responsive-images/">http://ivopetkov.com/b/lazy-load-responsive-images/</a>
+            <br/>
+            <br/>In this demo, you'll find four div tags with various sizes. When the image inside each div becomes visible on the screen,
+            the best version is selected and loaded. The available versions widths are 400px, 600px, 800px, 1000px, 1500px, 2000px, 2500px.
+            You can easily see which version is loaded via the text inside the image.</div>
+        <div class="example-title">max-width: 500px</div>
+        <div class="example-image" style="max-width:500px;">
+            <div class="responsively-lazy" style="padding-bottom:68.44%;">
+                <img alt="reponsivelyLazy demo image" src="images/2500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="images/600.jpg 600w, images/400.jpg 400w, images/800.jpg 800w, images/1500.jpg 1500w, images/1000.jpg 1000w, images/2000.jpg 2000w"
+                />
+            </div>
+        </div>
+        <div class="example-title">max-width: 900px</div>
+        <div class="example-image" style="max-width:900px;">
+            <div class="responsively-lazy" style="padding-bottom:68.44%;">
+                <img alt="reponsivelyLazy demo image" src="images/2500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="images/600.jpg 600w, images/400.jpg 400w, images/800.jpg 800w, images/1500.jpg 1500w, images/1000.jpg 1000w, images/2000.jpg 2000w"
+                />
+            </div>
+        </div>
+        <div class="example-title">width: 100%</div>
+        <div class="example-image">
+            <div class="responsively-lazy" style="padding-bottom:68.44%;">
+                <img alt="reponsivelyLazy demo image" src="images/2500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="images/600.jpg 600w, images/400.jpg 400w, images/800.jpg 800w, images/1500.jpg 1500w, images/1000.jpg 1000w, images/2000.jpg 2000w"
+                />
+            </div>
+        </div>
+        <div class="example-title">width: 800px</div>
+        <div class="example-image" style="width:800px;">
+            <div class="responsively-lazy" style="padding-bottom:68.44%;">
+                <img alt="reponsivelyLazy demo image" src="images/2500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="images/600.jpg 600w, images/400.jpg 400w, images/800.jpg 800w, images/1500.jpg 1500w, images/1000.jpg 1000w, images/2000.jpg 2000w"
+                />
+            </div>
+        </div>
+        <script async src="responsivelyLazy.min.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+              ga('create', 'UA-65160757-2', 'auto');
+              ga('send', 'pageview');
+        </script>
+    </body>
+
+</html>
