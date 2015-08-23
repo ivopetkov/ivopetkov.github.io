@@ -1,4 +1,4 @@
-# responsivelyLazy
+# Responsively Lazy
 
 This is a demo of the best lazy loading implementation available.
 

@@ -85,7 +85,7 @@ if (typeof responsivelyLazy === 'undefined') {
                         break;
                     }
                 }
-                //console.log(bestSelectedOption);
+
                 if (bestSelectedOption === null) {
                     bestSelectedOption = [element.getAttribute('src'), 999999];
                 }
