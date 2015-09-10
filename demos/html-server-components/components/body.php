@@ -78,12 +78,12 @@
             </component>
 
             <h2>Comment box</h2>
-            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/disqus-comments.php" target="_blank">view source</a></div>
+            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/disqus-comments.php" target="_blank">view source</a></div>
             <h3 class="text">This <a href="https://disqus.com/" target="_blank">Disqus</a> comments box created only by providing a short name.</h3>
             <component file="components/disqus-comments.php" short-name="ivopetkovgithubio"/>
 
             <h2>Social buttons</h2>
-            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/social-buttons.php" target="_blank">view source</a></div>
+            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/social-buttons.php" target="_blank">view source</a></div>
             <h3 class="text">Here we've got one social buttons component that uses three other components.</h3>
             <div style="text-align:center;">
                 <component file="components/social-buttons.php" url="http://ivopetkov.com/b/html-server-components/"/>
