@@ -1,0 +1,8 @@
+{
+    "name": "Push Notifications Demo by Ivo Petkov",
+    "short_name": "Push Notifications Demo",
+    "start_url": "/",
+    "display": "standalone",
+    "gcm_sender_id": "8996090156",
+    "gcm_user_visible_only": true
+}

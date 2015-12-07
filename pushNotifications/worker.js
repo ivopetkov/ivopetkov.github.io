@@ -1,0 +1,28 @@
+self.addEventListener('push', function (event) {
+    event.waitUntil(
+            self.registration.pushManager.getSubscription().then(
+            function (subscription) {
+                return fetch('http://ivopetkov.com/demos/pushnotifications/data.php?endpoint=' + encodeURIComponent(subscription.endpoint)).then(function (response) {
+                    if (response.status === 200) {
+                        return response.json().then(function (data) {
+                            return self.registration.showNotification(data.title, {
+                                'body': data.message,
+                                'icon': data.icon,
+                                'tag': data.tag,
+                                'data': data
+                            });
+                        });
+                    }
+                })
+            })
+            );
+});
+
+self.addEventListener('notificationclick', function (event) {
+    event.notification.close();
+    if (typeof event.notification.data.onClickUrl !== 'undefined') {
+        if (clients.openWindow) {
+            return clients.openWindow(event.notification.data.onClickUrl);
+        }
+    }
+});

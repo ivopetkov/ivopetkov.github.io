@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <link rel="manifest" href="manifest.json">
+    </head>
+    <body>
+        <textarea id="result" style="border:1px solid #ccc;background-color:#eee;font-size:14px;padding:20px;width:100%;"></textarea>
+        <script src="pushnotifications.js"></script>
+        <script type="text/javascript">
+            pushNotifications.initialize('worker.js', function () {
+                document.getElementById('result').value = 'Success! The endpoint is ' + pushNotifications.getEndpoint();
+            }, function (message) {
+                document.getElementById('result').value = 'Failed! Reason: ' + message;
+            })
+        </script>
+    </body>
+</html>
