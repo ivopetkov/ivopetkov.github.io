@@ -70,7 +70,7 @@
                     })
                 }
                 function sendNotification() {
-                    window.open("http://ivopetkov.com/demos/pushnotifications/send.php?endpoint=" + encodeURIComponent(pushNotifications.getEndpoint()));
+                    window.open("http://ivopetkov.com/demos/pushnotifications/send.php?endpoint=" + encodeURIComponent(pushNotifications.getEndpoint()) + '&time=' + (new Date()).getTime());
                 }
         </script>
     </body>
