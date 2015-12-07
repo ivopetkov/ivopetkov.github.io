@@ -2,7 +2,7 @@ self.addEventListener('push', function (event) {
     event.waitUntil(
             self.registration.pushManager.getSubscription().then(
             function (subscription) {
-                return fetch('http://ivopetkov.com/demos/pushnotifications/data.php?endpoint=' + encodeURIComponent(subscription.endpoint)).then(function (response) {
+                return fetch('https://ivopetkov.github.io/pushNotifications/data.json?endpoint=' + encodeURIComponent(subscription.endpoint)).then(function (response) {
                     if (response.status === 200) {
                         return response.json().then(function (data) {
                             return self.registration.showNotification(data.title, {

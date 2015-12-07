@@ -1,0 +1,7 @@
+{
+    "title": "test",
+    "icon": "https://ivopetkov.github.io/pushNotifications/icon.png",
+    "message": "test2",
+    "tag": "test3",
+    "onClickUrl": "http://ivopetkov.com/"
+}
