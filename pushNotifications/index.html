@@ -11,6 +11,10 @@
             }, function (message) {
                 document.getElementById('result').value = 'Failed! Reason: ' + message;
             })
+            function sendNotification() {
+                window.open("http://ivopetkov.com/demos/pushnotifications/send.php?endpoint=" + encodeURIComponent(pushNotifications.getEndpoint()));
+            }
         </script>
+        <button onclick="sendNotification()">Send</button>
     </body>
 </html>

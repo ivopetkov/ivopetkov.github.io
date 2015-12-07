@@ -1,3 +1,10 @@
+/*
+ * Push Notifications demo
+ * http://ivopetkov.com/
+ * Copyright 2015, Ivo Petkov
+ * Free to use under the MIT license.
+*/
+
 self.addEventListener('push', function (event) {
     event.waitUntil(
             self.registration.pushManager.getSubscription().then(
