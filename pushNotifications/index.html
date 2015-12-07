@@ -38,6 +38,9 @@
                 cursor:default;
                 background-color:#aaa;
             }
+            button.green:disabled{
+                background-color:#13E700;
+            }
         </style>
     </head>
     <body>
@@ -46,7 +49,8 @@
             <div style="color:#444;">This demo requires Chrome 42+ or other browsers that support Web App Manifests, Service Workers, Push API and Notification API.</div>
             <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
             <h2>Step 1</h2>
-            <button>Allow push notifications</button>
+            <button id="pushAllowButton">Allow push notifications</button>
+            <button id="pushAllowedButton" disabled="disabled" style="display:none;">Allow push notifications</button>
             <br/><br/><div>In this step you must allow notifications from this website.</div>
             <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
             <h2>Step 2</h2>
@@ -57,20 +61,13 @@
         <script type="text/javascript">
                 pushNotifications.initialize('worker.js', function () {
                     document.getElementById('sendButton').disabled = false;
+                    document.getElementById('pushAllowedButton').style.display = "auto";
+                    document.getElementById('pushAllowButton').style.display = "none";
                 }, function (message) {
                     alert("Error occured: " + message);
                 })
                 function sendNotification() {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function ()
-                    {
-                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
-                        {
-                            alert(xmlhttp.responseText);
-                        }
-                    }
-                    xmlhttp.open('GET', "http://ivopetkov.com/demos/pushnotifications/send.php?endpoint=" + encodeURIComponent(pushNotifications.getEndpoint()), true);
-                    xmlhttp.send();
+                    window.open("http://ivopetkov.com/demos/pushnotifications/send.php?endpoint=" + encodeURIComponent(pushNotifications.getEndpoint()));
                 }
         </script>
     </body>
