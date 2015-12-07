@@ -45,13 +45,13 @@
         </style>
     </head>
     <body>
-        <h1 style="padding:40px;padding-top:80px;font-size:40px;text-align:center;font-weight:normal;">Push Notifications Demo</h1>
+        <h1 style="padding:40px;padding-top:80px;font-size:40px;line-height:60px;text-align:center;font-weight:normal;">Push Notifications Demo</h1>
         <div style="text-align:center;">
             <div style="color:#444;">This demo requires Chrome 42+ or other browsers that support Web App Manifests, Service Workers, Push API and Notification API.</div>
             <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
             <h2>Step 1</h2>
             <button id="pushAllowButton">Allow push notifications</button>
-            <button id="pushAllowedButton" class="green" disabled="disabled" style="display:none;">Allow push notifications</button>
+            <button id="pushAllowedButton" class="green" disabled="disabled" style="display:none;">Push notifications are allowed</button>
             <br/><br/><div>In this step you must allow notifications from this website.</div>
             <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
             <h2>Step 2</h2>
@@ -63,7 +63,7 @@
                 pushNotifications.initialize('worker.js', function () {
                     document.getElementById('sendButton').disabled = false;
                     document.getElementById('pushAllowButton').style.display = "none";
-                    document.getElementById('pushAllowedButton').style.display = "block";
+                    document.getElementById('pushAllowedButton').style.display = "inline-block";
                 }, function (message) {
                     alert("Error occured: " + message);
                 })
