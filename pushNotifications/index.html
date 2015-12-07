@@ -62,7 +62,7 @@
         <script type="text/javascript">
                 pushNotifications.initialize('worker.js', function () {
                     document.getElementById('sendButton').disabled = false;
-                    document.getElementById('pushAllowedButton').style.display = "auto";
+                    document.getElementById('pushAllowedButton').style.display = "inline-block";
                     document.getElementById('pushAllowButton').style.display = "none";
                 }, function (message) {
                     alert("Error occured: " + message);
