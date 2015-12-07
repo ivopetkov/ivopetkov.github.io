@@ -60,15 +60,15 @@ if (typeof pushNotifications === 'undefined') {
 
                                     })
                                     .catch(function (error) {
-                                        onError('Error: ' + JSON.stringify(error));
+                                        onError('Unknow error: ' + JSON.stringify(error));
                                     });
                         })
                                 .catch(function (error) {
-                                    onError('Error: ' + JSON.stringify(error));
+                                    onError('Unknow error: ' + JSON.stringify(error));
                                 });
                     })
                     .catch(function (error) {
-                        onError('Error: ' + JSON.stringify(error));
+                        onError('Unknow error: ' + JSON.stringify(error));
                     });
         } else {
             onError('Service workers aren\'t supported in this browser.');
