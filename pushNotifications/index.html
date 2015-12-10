@@ -1,77 +1,105 @@
 <html>
-    <head>
-        <title>Push Notifications Demo by Ivo Petkov</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui"/>
-        <link rel="manifest" href="manifest.json">
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <style>
-            body{
-                padding:10px;
-                line-height:180%;
-            }
-            *{
-                font-family:Arial;
-                font-size:14px;
-            }
-            h1, h2{
-                font-family:'Raleway',Arial;
-            }
-            h2{
-                font-weight: normal;
-                font-size:20px;
-            }
-            button{
-                padding:20px;
-                border-radius: 2px;
-                background-color:#00cbe7;
-                border:0 none;
-                color:#fff;
-                cursor:pointer;
-            }
-            button:not(:disabled):hover{
-                background-color:#00ADC4;
-            }
-            button:not(:disabled):active{
-                background-color:#0098AD;
-            }
 
-            button:disabled{
-                cursor:default;
-                background-color:#aaa;
-            }
-            button.green:disabled{
-                background-color:#13E700;
-            }
-        </style>
-    </head>
-    <body>
-        <h1 style="padding:40px;padding-top:80px;font-size:40px;line-height:60px;text-align:center;font-weight:normal;">Push Notifications Demo</h1>
-        <div style="text-align:center;">
-            <div style="color:#444;">This demo requires Chrome 42+ or other browsers that support Web App Manifests, Service Workers, Push API and Notification API.</div>
-            <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
-            <h2>Step 1</h2>
-            <button id="pushAllowButton" onclick="allowNotifications()">Allow push notifications</button>
-            <button id="pushAllowedButton" class="green" disabled="disabled" style="display:none;">Push notifications are allowed</button>
-            <br/><br/><div>In this step you must allow notifications from this website.</div>
-            <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
-            <h2>Step 2</h2>
-            <button id="sendButton" disabled="disabled" onclick="sendNotification()">Send notification</button>
-            <br/><br/><div>Here a request is made to the demo server, which triggers a sample push notification.</div><br/><br/><br/><br/>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui" />
+    <meta charset="utf-8">
+    <title>Push Notifications Demo</title>
+    <meta name="description" content="Push Notifications Demo">
+    <meta name="author" content="ivopetkov.com">
+    <link rel="manifest" href="manifest.json">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            padding: 10px;
+            line-height: 180%;
+        }
+        
+        * {
+            font-family: Arial;
+            font-size: 14px;
+        }
+        
+        h1,
+        h2 {
+            font-family: 'Raleway', Arial;
+        }
+        
+        h2 {
+            font-weight: normal;
+            font-size: 20px;
+        }
+        
+        button {
+            padding: 20px;
+            border-radius: 2px;
+            background-color: #00cbe7;
+            border: 0 none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:not(:disabled):hover {
+            background-color: #00ADC4;
+        }
+        
+        button:not(:disabled):active {
+            background-color: #0098AD;
+        }
+        
+        button:disabled {
+            cursor: default;
+            background-color: #aaa;
+        }
+        
+        button.green:disabled {
+            background-color: #13E700;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="padding:40px;padding-top:80px;font-size:40px;line-height:60px;text-align:center;font-weight:normal;">Push Notifications Demo</h1>
+    <div style="text-align:center;">
+        <div style="color:#444;">This demo requires Chrome 42+ or other browsers that support Web App Manifests, Service Workers, Push API and Notification
+            API.
         </div>
-        <script src="pushnotifications.js"></script>
-        <script type="text/javascript">
-                function allowNotifications() {
+        <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
+        <h2>Step 1</h2>
+        <button id="pushAllowButton" onclick="allowNotifications()">Allow push notifications</button>
+        <button id="pushAllowButtonWaiting" onclick="allowNotifications()" style="display:none;">Waiting ...</button>
+        <button id="pushAllowedButton" class="green" disabled="disabled" style="display:none;">Push notifications are allowed</button>
+        <br/>
+        <br/>
+        <div>In this step you must allow notifications from this website.</div>
+        <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
+        <h2>Step 2</h2>
+        <button id="sendButton" disabled="disabled" onclick="sendNotification()">Send notification</button>
+        <br/>
+        <br/>
+        <div>Here a request is made to the demo server, which triggers a sample push notification.</div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+    <script src="pushnotifications.js"></script>
+    <script type="text/javascript">
+        function allowNotifications() {
+                    document.getElementById('pushAllowButton').style.display = "none";
+                    document.getElementById('pushAllowButtonWaiting').style.display = "inline-block";
                     pushNotifications.initialize('worker.js', function () {
                         document.getElementById('sendButton').disabled = false;
-                        document.getElementById('pushAllowButton').style.display = "none";
+                        document.getElementById('pushAllowButtonWaiting').style.display = "none";
                         document.getElementById('pushAllowedButton').style.display = "inline-block";
-                    }, function (message) {
-                        alert("Error occured: " + message);
+                    }, function (error) {
+                        alert("Error occured: " + error.message);
                     })
                 }
                 function sendNotification() {
                     window.open("http://ivopetkov.com/demos/pushnotifications/send.php?endpoint=" + encodeURIComponent(pushNotifications.getEndpoint()) + '&time=' + (new Date()).getTime());
                 }
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>

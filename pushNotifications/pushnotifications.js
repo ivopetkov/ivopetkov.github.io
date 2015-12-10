@@ -17,61 +17,61 @@ if (typeof pushNotifications === 'undefined') {
             };
         }
         if (typeof onError !== 'function') {
-            onError = function (message) {
-                console.log('pushNotifications error: ' + message);
+            onError = function (error) {
+                console.log('pushNotifications error: ' + error.message + ' (' + error.code + ')');
             };
         }
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register(serviceWorkerFilePath)
-                    .then(function () {
-                        if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
-                            onError('Notifications aren\'t supported.');
-                            return;
-                        }
-                        if (Notification.permission === 'denied') {
-                            onError('The user has blocked notifications.');
-                            return;
-                        }
-                        if (!('PushManager' in window)) {
-                            onError('Push messaging isn\'t supported.');
-                            return;
-                        }
-                        navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
-                            serviceWorkerRegistration.pushManager.getSubscription()
-                                    .then(function (subscription) {
-                                        if (subscription) {
+                .then(function () {
+                    if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+                        onError({ 'code': 'NOT_SUPPORTED', 'message': 'Notifications aren\'t supported.' });
+                        return;
+                    }
+                    if (Notification.permission === 'denied') {
+                        onError({ 'code': 'ACCESS_DENIED', 'message': 'The user has blocked notifications.' });
+                        return;
+                    }
+                    if (!('PushManager' in window)) {
+                        onError({ 'code': 'NOT_SUPPORTED', 'message': 'Push messaging isn\'t supported.' });
+                        return;
+                    }
+                    navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
+                        serviceWorkerRegistration.pushManager.getSubscription()
+                            .then(function (subscription) {
+                                if (subscription) {
+                                    pushNotifications.endpoint = subscription.endpoint;
+                                    onDone();
+                                } else {
+                                    serviceWorkerRegistration.pushManager.subscribe({ userVisibleOnly: true })
+                                        .then(function (subscription) {
                                             pushNotifications.endpoint = subscription.endpoint;
                                             onDone();
-                                        } else {
-                                            serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
-                                                    .then(function (subscription) {
-                                                        pushNotifications.endpoint = subscription.endpoint;
-                                                        onDone();
-                                                    })
-                                                    .catch(function (error) {
-                                                        if (Notification.permission === 'denied') {
-                                                            onError('Permission for Notifications was denied');
-                                                        } else {
-                                                            onError('Unable to subscribe to push: ' + JSON.stringify(error));
-                                                        }
-                                                    });
-                                        }
+                                        })
+                                        .catch(function (error) {
+                                            if (Notification.permission === 'denied') {
+                                                onError({ 'code': 'ACCESS_DENIED', 'message': 'Permission for Notifications was denied' });
+                                            } else {
+                                                onError({ 'code': 'UNKNOWN', 'message': JSON.stringify(error) });
+                                            }
+                                        });
+                                }
 
 
-                                    })
-                                    .catch(function (error) {
-                                        onError('Unknow error: ' + JSON.stringify(error));
-                                    });
-                        })
-                                .catch(function (error) {
-                                    onError('Unknow error: ' + JSON.stringify(error));
-                                });
+                            })
+                            .catch(function (error) {
+                                onError({ 'code': 'UNKNOWN', 'message': JSON.stringify(error) });
+                            });
                     })
-                    .catch(function (error) {
-                        onError('Unknow error: ' + JSON.stringify(error));
-                    });
+                        .catch(function (error) {
+                            onError({ 'code': 'UNKNOWN', 'message': JSON.stringify(error) });
+                        });
+                })
+                .catch(function (error) {
+                    onError({ 'code': 'UNKNOWN', 'message': JSON.stringify(error) });
+                });
         } else {
-            onError('Service workers aren\'t supported in this browser.');
+            onError({ 'code': 'NOT_SUPPORTED', 'message': 'Service workers aren\'t supported in this browser.' });
         }
     };
 
