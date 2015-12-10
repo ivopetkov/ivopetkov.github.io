@@ -67,7 +67,7 @@
         <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
         <h2>Step 1</h2>
         <button id="pushAllowButton" onclick="allowNotifications()">Allow push notifications</button>
-        <button id="pushAllowButtonWaiting" onclick="allowNotifications()" style="display:none;">Waiting ...</button>
+        <button id="pushAllowButtonWaiting" style="display:none;">Waiting ...</button>
         <button id="pushAllowedButton" class="green" disabled="disabled" style="display:none;">Push notifications are allowed</button>
         <br/>
         <br/>
@@ -93,6 +93,8 @@
                         document.getElementById('pushAllowButtonWaiting').style.display = "none";
                         document.getElementById('pushAllowedButton').style.display = "inline-block";
                     }, function (error) {
+                        document.getElementById('pushAllowButton').style.display = "inline-block";
+                        document.getElementById('pushAllowButtonWaiting').style.display = "none";
                         alert("Error occured: " + error.message);
                     })
                 }
