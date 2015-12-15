@@ -1,7 +1,0 @@
-{
-    "title": "Hi",
-    "icon": "https://ivopetkov.github.io/pushNotifications/icon.png",
-    "message": "This is a demo push notification. Learn more at ivopetkov.com",
-    "tag": "demo",
-    "onClickUrl": "http://ivopetkov.com/"
-}

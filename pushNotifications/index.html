@@ -81,7 +81,7 @@
             <div>In this step you must allow notifications from this website.</div>
             <div style="font-size:20px;padding-top:60px;padding-bottom:30px;">&dot; &dot; &dot;</div>
             <h2>Step 2</h2>
-            <div style="text-align:center;padding-bottom:30px;"><textarea>{
+            <div style="text-align:center;padding-bottom:30px;"><textarea id="data">{
     "title": "Hi",
     "icon": "https://ivopetkov.github.io/pushNotifications/icon.png",
     "message": "This is a demo push notification. Learn more at ivopetkov.com",
@@ -89,7 +89,7 @@
     "onClickUrl": "http://ivopetkov.com/"
 }</textarea></div>
             <button id="sendButton" disabled="disabled" onclick="sendNotification()">Send notification</button>
-            <button id="sendingButton" class="green" style="display:none;">Sending ...</button>
+            <button id="sendingButton" class="green" disabled="disabled" style="display:none;">Sending ...</button>
             <br/>
             <br/>
             <div>Here a request is made to the demo server, which triggers a sample push notification.</div>
