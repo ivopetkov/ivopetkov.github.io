@@ -1,16 +1,18 @@
-<html>
+<?php
+$id = 'c' . uniqid();
+?><html>
     <head>
-        <link rel="stylesheet" href="vendor/owlcarousel/assets/owl.carousel.css" />
+        <link rel="stylesheet" href="assets/owlcarousel/assets/owl.carousel.css" />
     </head>
     <body>
-        <div class="<?php echo $component->id ?> owl-theme">
+        <div class="<?php echo $id ?> owl-theme">
             <?php echo $component->innerHTML; ?>
         </div>
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/owlcarousel/owl.carousel.min.js"></script>
+        <script src="assets/jquery/jquery.min.js"></script>
+        <script src="assets/owlcarousel/owl.carousel.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('.<?php echo $component->id ?>').owlCarousel(
+                $('.<?php echo $id ?>').owlCarousel(
                         {
                             margin:<?php echo $component->getAttribute('margin', 0) ?>,
                             responsiveClass: true,

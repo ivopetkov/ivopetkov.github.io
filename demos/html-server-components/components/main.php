@@ -11,8 +11,8 @@
         </style>
     </head>
     <body>
-    <component file="components/header.php" page="<?php echo $component->page; ?>"/>
-    <component file="components/body.php" page="<?php echo $component->page; ?>"/>
-    <component file="components/footer.php"/>
+    <component src="file:components/header.php" page="<?php echo $component->page; ?>"/>
+    <component src="file:components/body.php" page="<?php echo $component->page; ?>"/>
+    <component src="file:components/footer.php"/>
 </body>
 </html>

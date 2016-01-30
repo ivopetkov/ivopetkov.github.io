@@ -18,7 +18,7 @@
             $navigationItems['contact-me'] = 'Contact me';
             ?>
             <div style="text-align: center;padding-bottom:30px;">
-                <component file="components/navigation.php" selected="<?php echo $pageParts[0] ?>" items="<?php echo htmlentities(json_encode($navigationItems)) ?>">
+                <component src="file:components/navigation.php" selected="<?php echo $pageParts[0] ?>" items="<?php echo htmlentities(json_encode($navigationItems)) ?>">
             </div>
         </header>
     </body>

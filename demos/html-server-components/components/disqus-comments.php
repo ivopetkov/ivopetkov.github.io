@@ -3,7 +3,7 @@
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES * * */
-            var disqus_shortname = '<?php echo $component->getAttribute('short-name') ?>';
+            var disqus_shortname = '<?php echo $component->getAttribute('shortName') ?>';
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {

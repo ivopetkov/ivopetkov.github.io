@@ -1,0 +1,16 @@
+{
+    "name": "ivopetkov/html-server-components-demo",
+    "description": "HTML Server Components demo",
+    "homepage": "http://ivopetkov.com/b/html-server-components/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivo Petkov",
+            "email": "ivo@ivopetkov.com",
+            "homepage": "http://ivopetkov.com"
+        }
+    ],
+    "require": {
+        "ivopetkov/html-server-components-compiler": "*"
+    }
+}

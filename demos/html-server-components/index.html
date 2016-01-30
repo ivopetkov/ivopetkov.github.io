@@ -1,155 +1,171 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>HTML Server Components demo</title>
-        <style>
-            html, body{
-                padding: 0;
-                margin: 0;
-            }
-        </style>
-        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet" type="text/css">
-        <style>
-            .navigation-item{
-                padding: 15px;
-                padding-left: 20px;
-                padding-right: 20px;
-                display: inline-block;
-                background-color: #eee;
-                color: #000;
-                text-decoration: none;
-                font-family: sans-serif;
-                font-size: 14px;
-            }
-            .navigation-item:not(.selected):hover{
-                background-color: #ddd;
-            }
-            .navigation-item:not(.selected):active{
-                background-color: #ccc;
-            }
-            .selected{
-                background-color: #333;
-                color: #fff;
-            }
-        </style>
-        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet" type="text/css">
-        <style>
-            .__cmp55f1f10ea7394{
-                max-width: 700px;
-                margin: 0 auto;
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-            .__cmp55f1f10ea7394 h1{
-                text-align: center;
-                font-family: 'PT Sans Narrow', sans-serif;
-                color: #188EB5;
-                font-size: 35px;
-                padding: 20px;
-            }
-            .__cmp55f1f10ea7394 h2{
-                text-align: center;
-                font-family: 'PT Sans Narrow', sans-serif;
-                color: #188EB5;
-                font-size: 25px;
-                padding: 20px;
-                padding-bottom: 0;
-                padding-top: 3rem;
-            }
-            .__cmp55f1f10ea7394 h3{
-                line-height: 180%;
-                padding: 2rem;
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-                font-family: sans-serif;
-                font-size: 15px;
-                text-align: center;
-                font-weight: normal;
-            }
-            .__cmp55f1f10ea7394 .view-source-button{
-                text-align: center;
-                padding-top: 1rem;
-            }
-            .__cmp55f1f10ea7394 .view-source-button > a{
-                text-decoration: none;
-                padding: 1rem;
-                color: #888;
-                font-family: sans-serif;
-                font-size: 15px;
-            }
-            .__cmp55f1f10ea7394 .view-source-button > a:hover{
-                color: #555;
-            }
-            .__cmp55f1f10ea7394 .view-source-button > a:active{
-                color: #222;
-            }
-            .__cmp55f1f10ea7394 a{
-                color: #000;
-            }
-        </style>
-        <link rel="stylesheet" href="vendor/responsivelylazy/responsivelyLazy.min.css">
-        <link rel="stylesheet" href="vendor/owlcarousel/assets/owl.carousel.css">
-        <style>
-            footer{
-                text-align: center;
-                color: #fff;
-                font-family: sans-serif;
-                font-size: 15px;
-                padding-top: 50px;
-                padding-bottom: 50px;
-                border-top: 1px solid #111;
-                background-color: #333;
-                margin-top: 50px;
-                line-height: 180%;
-            }
-            footer a{
-                font-family: sans-serif;
-                font-size: 15px;
-                color:#fff;
-            }
-        </style>
-    </head>
-    <body>
 
-        <header><div style="text-align: center;padding-top:50px;padding-bottom:20px;font-size:50px;font-family: 'PT Sans Narrow', sans-serif;">Ivo Petkov</div>
-            <div style="text-align: center;padding-bottom:70px;font-size:15px;font-family: sans-serif;">personal demo website created with HTML Server Components</div>
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Server Components demo</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet" type="text/css">
+    <style>
+        .navigation-item {
+            padding: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+            display: inline-block;
+            background-color: #eee;
+            color: #000;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+        
+        .navigation-item:not(.selected):hover {
+            background-color: #ddd;
+        }
+        
+        .navigation-item:not(.selected):active {
+            background-color: #ccc;
+        }
+        
+        .selected {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet" type="text/css">
+    <style>
+        .c56ac4a5560c1b {
+            max-width: 700px;
+            margin: 0 auto;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .c56ac4a5560c1b h1 {
+            text-align: center;
+            font-family: 'PT Sans Narrow', sans-serif;
+            color: #188EB5;
+            font-size: 35px;
+            padding: 20px;
+        }
+        
+        .c56ac4a5560c1b h2 {
+            text-align: center;
+            font-family: 'PT Sans Narrow', sans-serif;
+            color: #188EB5;
+            font-size: 25px;
+            padding: 20px;
+            padding-bottom: 0;
+            padding-top: 3rem;
+        }
+        
+        .c56ac4a5560c1b h3 {
+            line-height: 180%;
+            padding: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            font-family: sans-serif;
+            font-size: 15px;
+            text-align: center;
+            font-weight: normal;
+        }
+        
+        .c56ac4a5560c1b .view-source-button {
+            text-align: center;
+            padding-top: 1rem;
+        }
+        
+        .c56ac4a5560c1b .view-source-button > a {
+            text-decoration: none;
+            padding: 1rem;
+            color: #888;
+            font-family: sans-serif;
+            font-size: 15px;
+        }
+        
+        .c56ac4a5560c1b .view-source-button > a:hover {
+            color: #555;
+        }
+        
+        .c56ac4a5560c1b .view-source-button > a:active {
+            color: #222;
+        }
+        
+        .c56ac4a5560c1b a {
+            color: #000;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/responsivelylazy/responsivelyLazy.min.css">
+    <link rel="stylesheet" href="assets/owlcarousel/assets/owl.carousel.css">
+    <style>
+        footer {
+            text-align: center;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 15px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border-top: 1px solid #111;
+            background-color: #333;
+            margin-top: 50px;
+            line-height: 180%;
+        }
+        
+        footer a {
+            font-family: sans-serif;
+            font-size: 15px;
+            color: #fff;
+        }
+    </style>
+</head>
 
-            <div style="text-align: center;padding-bottom:30px;">
+<body>
+    <header>
+        <div style="text-align: center;padding-top:50px;padding-bottom:20px;font-size:50px;font-family: 'PT Sans Narrow', sans-serif;">Ivo Petkov</div>
+        <div style="text-align: center;padding-bottom:70px;font-size:15px;font-family: sans-serif;">personal demo website created with HTML Server Components</div>
 
-                <div style="display: inline-block;">
-                    <a href="#" class="navigation-item">About me</a><a href="#" class="navigation-item selected">Articles</a><a href="#" class="navigation-item">Podcast</a><a href="#" class="navigation-item">Events</a><a href="#" class="navigation-item">Contact me</a>        </div>
-            </div>
-        </header><div class="__cmp55f1f10ea7394">
-            <h1>HTML Server Components Rock!</h1>
-            <h3>In this page you'll find some HTML Server Components. The source (writen in PHP) is available at <a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/" target="_blank">GitHub</a> and details article is posted at <a href="http://ivopetkov.com/b/html-server-components/" target="_blank">ivopetkov.com</a>.</h3>
+        <div style="text-align: center;padding-bottom:30px;">
+            <div style="display: inline-block;">
+                <a href="#" class="navigation-item">About me</a><a href="#" class="navigation-item selected">Articles</a>
+                <a
+                href="#" class="navigation-item">Podcast</a><a href="#" class="navigation-item">Events</a><a href="#" class="navigation-item">Contact me</a>                    </div>
+        </div>
+    </header>
+    <div class="c56ac4a5560c1b">
+        <h1>HTML Server Components Rock!</h1>
+        <h3>In this page you'll find some HTML Server Components. The source (writen in PHP) is available at <a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/" target="_blank">GitHub</a> and details article is posted at <a href="http://ivopetkov.com/b/html-server-components/" target="_blank">ivopetkov.com</a>.</h3>
 
-            <h2>Lazy loaded responive images</h2>
-            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/lazy-image.php" target="_blank">view source</a></div>
-            <h3>The following image is lazy loaded using the <a href="https://github.com/ivopetkov/responsively-lazy" target="_blank">Responsively Lazy library</a>.</h3>
-
-            <div class="responsively-lazy" style="padding-bottom:66.666666666667%;margin-bottom:1rem;">
-                <img alt="" src="images/1500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="images/500.jpg 500w, images/700.jpg 700w, images/1000.jpg 1000w, images/1500.jpg 1500w">
-            </div>
-            <h2>Carousel</h2>
-            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/carousel.php" target="_blank">view source</a></div>
-            <h3>The following carousel is build with <a href="http://www.owlcarousel.owlgraphic.com/" target="_blank">Owl Carousel 2</a>.</h3>
-
-            <div class="__cmp55f1f10eab601 owl-theme">
-                <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#3CB0D6;">1</div>
-                <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#2996BA;">2</div>
-                <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#1E84A6;">3</div>
-                <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#146E8C;">4</div>
-                <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#0E5A73;">5</div>
-            </div>
-            <h2>Comment box</h2>
-            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/disqus-comments.php" target="_blank">view source</a></div>
-            <h3 class="text">This <a href="https://disqus.com/" target="_blank">Disqus</a> comments box created only by providing a short name.</h3>
-
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                /* * * CONFIGURATION VARIABLES * * */
+        <h2>Lazy loaded responive images</h2>
+        <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/lazy-image.php"
+            target="_blank">view source</a></div>
+        <h3>The following image is lazy loaded using the <a href="https://github.com/ivopetkov/responsively-lazy" target="_blank">Responsively Lazy library</a>.</h3>
+        <div class="responsively-lazy" style="padding-bottom:66.666666666667%;margin-bottom:1rem;">
+            <img alt="" src="images/1500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-srcset="images/500.jpg 500w, images/700.jpg 700w, images/1000.jpg 1000w, images/1500.jpg 1500w"></div>
+        <h2>Carousel</h2>
+        <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/carousel.php"
+            target="_blank">view source</a></div>
+        <h3>The following carousel is build with <a href="http://www.owlcarousel.owlgraphic.com/" target="_blank">Owl Carousel 2</a>.</h3>
+        <div class="c56ac4a5561737 owl-theme">
+            <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#3CB0D6;">1</div>
+            <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#2996BA;">2</div>
+            <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#1E84A6;">3</div>
+            <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#146E8C;">4</div>
+            <div style="color:#fff;font-family:Arial;font-size:50px;line-height:200px;text-align:center;width:100%;height:200px;background-color:#0E5A73;">5</div>
+        </div>
+        <h2>Comment box</h2>
+        <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/disqus-comments.php"
+            target="_blank">view source</a></div>
+        <h3 class="text">This <a href="https://disqus.com/" target="_blank">Disqus</a> comments box created only by providing a short name.</h3>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
                 var disqus_shortname = 'ivopetkovgithubio';
 
                 /* * * DON'T EDIT BELOW THIS LINE * * */
@@ -160,20 +176,21 @@
                     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                 })();
-            </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-            </noscript>
-            <h2>Social buttons</h2>
-            <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/social-buttons.php" target="_blank">view source</a></div>
-            <h3 class="text">Here we've got one social buttons component that uses three other components.</h3>
-            <div style="text-align:center;">
-
-                <div style="font-size: 0;display-inline:block;">
-                    <div style="display:inline-block;height:30px;padding-right:1rem;">
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://ivopetkov.com/b/html-server-components/">Tweet</a>
-                    </div>
-                    <div style="display:inline-block;height:30px;padding-right:1rem;">
-                        <div id="fb-root"></div>
-                        <script>(function (d, s, id) {
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        <h2>Social buttons</h2>
+        <div class="view-source-button"><a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/components/social-buttons.php"
+            target="_blank">view source</a></div>
+        <h3 class="text">Here we've got one social buttons component that uses three other components.</h3>
+        <div style="text-align:center;">
+            <div style="font-size: 0;display-inline:block;">
+                <div style="display:inline-block;height:30px;padding-right:1rem;">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://ivopetkov.com/b/html-server-components/">Tweet</a>
+                </div>
+                <div style="display:inline-block;height:30px;padding-right:1rem;">
+                    <div id="fb-root"></div>
+                    <script>
+                        (function (d, s, id) {
                                 var js, fjs = d.getElementsByTagName(s)[0];
                                 if (d.getElementById(id))
                                     return;
@@ -181,21 +198,24 @@
                                 js.id = id;
                                 js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
                                 fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk'));</script><div class="fb-share-button" data-href="http://ivopetkov.com/b/html-server-components/" data-layout="button_count"></div>
-                    </div>
-                    <div style="display:inline-block;height:30px;">
-                        <script type="IN/Share" data-url="http://ivopetkov.com/b/html-server-components/" data-counter="right"></script>
-                    </div>
+                            }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    <div class="fb-share-button" data-href="http://ivopetkov.com/b/html-server-components/" data-layout="button_count"></div>
+                </div>
+                <div style="display:inline-block;height:30px;">
+                    <script type="IN/Share" data-url="http://ivopetkov.com/b/html-server-components/" data-counter="right"></script>
                 </div>
             </div>
         </div>
-
-        <footer>
-            This demo page was created with HTML Server Components.<br>
-            Browse the source at <a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/" target="_blank">GitHub</a><br>
-            View the article at <a href="http://ivopetkov.com/b/html-server-components/" target="_blank">ivopetkov.com</a>
-        </footer>
-        <script>!function (d, s, id) {
+    </div>
+    <footer>
+        This demo page was created with HTML Server Components.
+        <br> Browse the source at <a href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/demos/html-server-components/"
+        target="_blank">GitHub</a>
+        <br> View the article at <a href="http://ivopetkov.com/b/html-server-components/" target="_blank">ivopetkov.com</a>
+    </footer>
+    <script>
+        !function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
                 if (!d.getElementById(id)) {
                     js = d.createElement(s);
@@ -204,13 +224,15 @@
                     fjs.parentNode.insertBefore(js, fjs);
                 }
             }(document, 'script', 'twitter-wjs');
-        </script>
-        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/owlcarousel/owl.carousel.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.__cmp55f1f10eab601').owlCarousel(
+    </script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+        lang: en_US
+    </script>
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/owlcarousel/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+                $('.c56ac4a5561737').owlCarousel(
                         {
                             margin: 10,
                             responsiveClass: true,
@@ -228,7 +250,8 @@
                         }
                 );
             });
-        </script>
-        <script async src="vendor/responsivelylazy/responsivelyLazy.min.js"></script>
-    </body>
+    </script>
+    <script async src="assets/responsivelylazy/responsivelyLazy.min.js"></script>
+</body>
+
 </html>
