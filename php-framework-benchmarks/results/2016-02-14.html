@@ -1,0 +1,338 @@
+
+<html><head><title>PHP Frameworks benchmarks</title></head><body><h1>Results (Feb 14, 2016 09:59)</h1>Total requests per benchmark: 1000<br/>Concurrent requests per benchmark: 10<br/>Time limit: 10sec<br/><br/><table style="border-collapse:collapse;"><tr><th style="border:1px solid #ddd;padding:.5rem;text-align:left;">Framework</th><th style="border:1px solid #ddd;padding:.5rem;text-align:left;">Requests per second</th><th style="border:1px solid #ddd;padding:.5rem;text-align:left;">Status</th></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Bear Framework v0.6</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">903.17</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 2 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Cake PHP v3.2</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">104.17</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 10 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Code Igniter v3.0</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">518.56</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 2 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Laravel v5.2</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">73.76</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 11 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Lumen v5.2</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">262.00</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 4 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Slim Framework v3.0</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">333.75</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 4 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Symfony v3.0</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">36.60</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 11 seconds.</td></tr><tr><td style="border:1px solid #ddd;padding:.5rem;">Yii Framework v2.0</td><td style="border:1px solid #ddd;padding:.5rem;text-align:right;">232.60</td><td style="border:1px solid #ddd;padding:.5rem;">Benchmark successfull in 5 seconds.</td></tr></table><h1>Output</h1><h3>Bear Framework v0.6</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/bearframework-v0.6/public/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   1.107 seconds
+Complete requests:      1000
+Failed requests:        0
+Keep-Alive requests:    993
+Total transferred:      323702 bytes
+HTML transferred:       2000 bytes
+Requests per second:    903.17 [#/sec] (mean)
+Time per request:       11.072 [ms] (mean)
+Time per request:       1.107 [ms] (mean, across all concurrent requests)
+Transfer rate:          285.51 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       4
+Processing:     0   10  34.3      0     622
+Waiting:        0   10  34.2      0     622
+Total:          0   10  34.4      0     624
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      3
+  75%      6
+  80%     12
+  90%     16
+  95%     58
+  98%    104
+  99%    116
+ 100%    624 (longest request)</pre><h3>Cake PHP v3.2</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/cakephp-v3.2/webroot/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   9.600 seconds
+Complete requests:      1000
+Failed requests:        0
+Keep-Alive requests:    994
+Total transferred:      260737 bytes
+HTML transferred:       2000 bytes
+Requests per second:    104.17 [#/sec] (mean)
+Time per request:       95.996 [ms] (mean)
+Time per request:       9.600 [ms] (mean, across all concurrent requests)
+Transfer rate:          26.52 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   2.8      0      34
+Processing:     4   95  83.5     68    1252
+Waiting:        0   95  83.5     67    1252
+Total:          4   96  84.6     68    1285
+
+Percentage of the requests served within a certain time (ms)
+  50%     68
+  66%    116
+  75%    131
+  80%    140
+  90%    183
+  95%    226
+  98%    287
+  99%    311
+ 100%   1285 (longest request)</pre><h3>Code Igniter v3.0</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/codeigniter-v3.0/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   1.928 seconds
+Complete requests:      1000
+Failed requests:        0
+Keep-Alive requests:    993
+Total transferred:      260699 bytes
+HTML transferred:       2000 bytes
+Requests per second:    518.56 [#/sec] (mean)
+Time per request:       19.284 [ms] (mean)
+Time per request:       1.928 [ms] (mean, across all concurrent requests)
+Transfer rate:          132.02 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       4
+Processing:     1   19  63.8      5    1274
+Waiting:        0   19  63.7      4    1274
+Total:          1   19  63.9      5    1276
+
+Percentage of the requests served within a certain time (ms)
+  50%      5
+  66%     14
+  75%     17
+  80%     19
+  90%     52
+  95%     86
+  98%    118
+  99%    148
+ 100%   1276 (longest request)</pre><h3>Laravel v5.2</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/laravel-v5.2/public/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   10.005 seconds
+Complete requests:      738
+Failed requests:        0
+Keep-Alive requests:    0
+Total transferred:      219186 bytes
+HTML transferred:       1476 bytes
+Requests per second:    73.76 [#/sec] (mean)
+Time per request:       135.568 [ms] (mean)
+Time per request:       13.557 [ms] (mean, across all concurrent requests)
+Transfer rate:          21.39 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   2.0      0      28
+Processing:     6  134  99.2    133     612
+Waiting:        0  119 100.8    115     612
+Total:          6  134  99.2    134     612
+
+Percentage of the requests served within a certain time (ms)
+  50%    134
+  66%    161
+  75%    182
+  80%    205
+  90%    271
+  95%    319
+  98%    387
+  99%    432
+ 100%    612 (longest request)</pre><h3>Lumen v5.2</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/lumen-v5.2/public/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   3.817 seconds
+Complete requests:      1000
+Failed requests:        0
+Keep-Alive requests:    0
+Total transferred:      250000 bytes
+HTML transferred:       2000 bytes
+Requests per second:    262.00 [#/sec] (mean)
+Time per request:       38.167 [ms] (mean)
+Time per request:       3.817 [ms] (mean, across all concurrent requests)
+Transfer rate:          63.97 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   4.7      0      31
+Processing:     2   36  50.1     18     297
+Waiting:        0   30  49.0     10     297
+Total:          2   38  49.9     21     297
+
+Percentage of the requests served within a certain time (ms)
+  50%     21
+  66%     29
+  75%     34
+  80%     54
+  90%    116
+  95%    152
+  98%    183
+  99%    235
+ 100%    297 (longest request)</pre><h3>Slim Framework v3.0</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/slimframework-v3.0/public/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   2.996 seconds
+Complete requests:      1000
+Failed requests:        0
+Keep-Alive requests:    994
+Total transferred:      455739 bytes
+HTML transferred:       2000 bytes
+Requests per second:    333.75 [#/sec] (mean)
+Time per request:       29.963 [ms] (mean)
+Time per request:       2.996 [ms] (mean, across all concurrent requests)
+Transfer rate:          148.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.5      0       6
+Processing:     1   30  72.1     16    1391
+Waiting:        0   30  72.1     16    1391
+Total:          1   30  72.4     16    1397
+
+Percentage of the requests served within a certain time (ms)
+  50%     16
+  66%     18
+  75%     25
+  80%     31
+  90%     83
+  95%    110
+  98%    147
+  99%    191
+ 100%   1397 (longest request)</pre><h3>Symfony v3.0</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/symfony-v3.0/web/app.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   10.026 seconds
+Complete requests:      367
+Failed requests:        0
+Keep-Alive requests:    0
+Total transferred:      108999 bytes
+HTML transferred:       734 bytes
+Requests per second:    36.60 [#/sec] (mean)
+Time per request:       273.192 [ms] (mean)
+Time per request:       27.319 [ms] (mean, across all concurrent requests)
+Transfer rate:          10.62 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   3.5      0      22
+Processing:    62  269 132.1    244     819
+Waiting:       59  256 134.3    229     819
+Total:         62  269 132.1    245     819
+
+Percentage of the requests served within a certain time (ms)
+  50%    244
+  66%    311
+  75%    347
+  80%    372
+  90%    449
+  95%    516
+  98%    579
+  99%    645
+ 100%    819 (longest request)</pre><h3>Yii Framework v2.0</h3><pre>This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        Apache/2.4.16
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /frameworks/yiiframework-v2.0/web/index.php
+Document Length:        2 bytes
+
+Concurrency Level:      10
+Time taken for tests:   4.299 seconds
+Complete requests:      1000
+Failed requests:        0
+Keep-Alive requests:    0
+Total transferred:      225000 bytes
+HTML transferred:       2000 bytes
+Requests per second:    232.60 [#/sec] (mean)
+Time per request:       42.993 [ms] (mean)
+Time per request:       4.299 [ms] (mean, across all concurrent requests)
+Transfer rate:          51.11 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   5.3      0      42
+Processing:     2   41  54.5     20     389
+Waiting:        0   34  53.7     12     389
+Total:          2   43  54.6     24     397
+
+Percentage of the requests served within a certain time (ms)
+  50%     24
+  66%     32
+  75%     44
+  80%     78
+  90%    132
+  95%    161
+  98%    192
+  99%    216
+ 100%    397 (longest request)</pre></body></html>
