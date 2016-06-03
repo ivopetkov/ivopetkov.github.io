@@ -32,6 +32,26 @@
                 border-radius: 2px;
                 line-height: 0;
             }
+            
+            .example-image.loading:before{
+                content:"Loading...";
+                background-color:#1380BA;
+                display:inline-block;
+                padding:20px 15px;
+                z-index:100;
+                position:absolute;
+                font-family:Arial;
+                font-size:14px;
+                color:#fff;
+                margin-top:5px;
+                margin-left:5px;
+            }
+            
+            .example-image.loaded:before{
+                content:"Loaded";
+                background-color:#5BAD0E;
+            }
+            
         </style>
     </head>
 
@@ -100,6 +120,15 @@
                          data-srcset="images/400.jpg 400w, images/400.webp 400w, images/600.jpg 600w, images/600.webp 600w, images/800.jpg 800w, images/800.webp 800w, images/1000.jpg 1000w, images/1000.webp 1000w, images/1500.jpg 1500w, images/1500.webp 1500w, images/2000.jpg 2000w, images/2000.webp 2000w"
                          />
                 </div>
+            </div>
+        </div>
+        
+        <div class="example-title">With onlazyload handler</div>
+        <div class="example-image loading" style="width:800px;">
+            <div class="responsively-lazy" data-onlazyload="this.parentNode.className+=' loaded';" style="padding-bottom:68.44%;">
+                <img alt="reponsivelyLazy demo image" src="images/2500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     data-srcset="images/400.jpg 400w, images/400.webp 400w, images/600.jpg 600w, images/600.webp 600w, images/800.jpg 800w, images/800.webp 800w, images/1000.jpg 1000w, images/1000.webp 1000w, images/1500.jpg 1500w, images/1500.webp 1500w, images/2000.jpg 2000w, images/2000.webp 2000w"
+                     />
             </div>
         </div>
 
