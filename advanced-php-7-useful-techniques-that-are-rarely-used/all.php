@@ -134,11 +134,41 @@ class Person
 
 }
 
+
+
+__construct()
+__destruct()
+
+__call()
+__callStatic()
+
+__get()
+__set()
+__isset()
+__unset()
+
+__sleep()
+__wakeup()
+
+__toString()
+__invoke()
+__set_state()
+__clone()
+__debugInfo()
+
+
+
+
+
+
+
+
+
 register_shutdown_function(function() {
     $data = error_get_last();
     if (is_array($data)) {
         ob_end_clean();
-        echo 'Error occured! - ' . $data['message'];
+        echo 'Error occurred! - ' . $data['message'];
     }
 });
 
