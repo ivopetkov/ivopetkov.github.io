@@ -16,7 +16,7 @@ $factorial = function($number) use (&$factorial) {
     }
 };
 
-echo $factorial(4);
+echo $factorial(4); // 24
 
 /*
 Result will be:
