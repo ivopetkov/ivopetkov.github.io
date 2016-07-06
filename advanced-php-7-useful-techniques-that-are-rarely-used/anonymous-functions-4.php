@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Advanced PHP
- * Anonymous functions, recursion
- * http://ivopetkov.com/b/advanced-php/
+ * 7 PHP Features that are rarely used
+ * Anonymous functions
+ * http://ivopetkov.com/
  * Copyright (c) 2016 Ivo Petkov
  * Free to use under the MIT license.
  */

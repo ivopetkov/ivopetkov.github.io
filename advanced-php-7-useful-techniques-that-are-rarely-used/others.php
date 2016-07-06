@@ -1,8 +1,8 @@
 <?php
 
 /*
- * Advanced PHP
- * http://ivopetkov.com/b/advanced-php/
+ * 7 PHP Features that are rarely used
+ * http://ivopetkov.com/
  * Copyright (c) 2016 Ivo Petkov
  * Free to use under the MIT license.
  */
@@ -16,47 +16,6 @@ function sum($a, $b)
 echo sum(1, 2); // 3
 echo sum(2, 2); // 4
 
-
-
-
-$sum = function($a, $b) {
-    return $a + $b;
-};
-
-echo $sum(1, 2); // 3
-echo $sum(2, 2); // 4
-
-unset($sum);
-
-
-
-
-$list = [
-    ['name' => 'John', 'age' => 31],
-    ['name' => 'Mike', 'age' => 25],
-    ['name' => 'Ben', 'age' => 27]
-];
-
-usort($list, function($a, $b) {
-    if ($a['age'] == $b['age']) {
-        return 0;
-    }
-    return ($a['age'] < $b['age']) ? -1 : 1;
-});
-
-$person = new class{
-
-    public $age = null;
-
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-};
-
-$person->age = 25;
-echo $person->getAge(); // 25
 
 
 
@@ -102,37 +61,6 @@ try {
     print_r($e);
 }
 
-class Person
-{
-
-    public $name = null;
-    public $age = null;
-
-}
-
-class Person
-{
-
-    public $name = null;
-    private $age = null;
-
-    function __set($name, $value)
-    {
-        if ($name === 'age') {
-            if (is_int($value)) {
-                $this->age = $value;
-            } else {
-                throw new InvalidArgumentException('Age is invalid. Must be integer.');
-            }
-        }
-    }
-
-    function __get($name)
-    {
-        return $this->age;
-    }
-
-}
 
 
 

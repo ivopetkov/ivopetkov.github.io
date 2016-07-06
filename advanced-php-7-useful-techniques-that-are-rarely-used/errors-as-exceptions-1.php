@@ -1,15 +1,15 @@
 <?php
 
 /*
- * Advanced PHP
+ * 7 PHP Features that are rarely used
  * Errors as exceptions
- * http://ivopetkov.com/b/advanced-php/
+ * http://ivopetkov.com/
  * Copyright (c) 2016 Ivo Petkov
  * Free to use under the MIT license.
  */
 
-set_error_handler(function($errorNumber, $errorMessage, $errorFile, $errorLine) {
-    throw new \ErrorException($errorMessage, 0, $errorNumber, $errorFile, $errorLine);
+set_error_handler(function($number, $message, $file, $line) {
+    throw new \ErrorException($message, 0, $number, $file, $line);
 });
 
 try {

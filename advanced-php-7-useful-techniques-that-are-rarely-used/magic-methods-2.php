@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Advanced PHP
- * Magic methods, validating properties
- * http://ivopetkov.com/b/advanced-php/
+ * 7 PHP Features that are rarely used
+ * Magic methods
+ * http://ivopetkov.com/
  * Copyright (c) 2016 Ivo Petkov
  * Free to use under the MIT license.
  */
@@ -11,42 +11,32 @@
 class Person
 {
 
-    private $data = [];
-    public $eyesColor = null;
-    public $hairColor = null;
+    public $name = null;
+    private $age = null;
 
     function __set($name, $value)
     {
         if ($name === 'age') {
-            if (is_int($value) && $value >= 18) {
-                $this->data[$name] = $value;
+            if (is_int($value)) {
+                $this->age = $value;
             } else {
-                throw new InvalidArgumentException('Age is invalid. Must be at least 18.');
+                throw new \Exception('Invalid age value');
             }
         }
     }
 
     function __get($name)
     {
-        return isset($this->data[$name]) ? $this->data[$name] : null;
-    }
-
-    function __isset($name)
-    {
-        return isset($this->data[$name]);
-    }
-
-    function __unset($name)
-    {
-        if (isset($this->data[$name])) {
-            unset($this->data[$name]);
+        if ($name === 'age') {
+            return $this->age;
         }
     }
 
 }
 
 $person = new Person();
-$person->age = 20;
+$person->name = 'John';
+$person->age = 25;
 print_r($person);
 
 /*
@@ -54,29 +44,8 @@ Result will be:
 
 Person Object
 (
-    [data:Person:private] => Array
-        (
-            [age] => 20
-        )
-
-    [eyesColor] => 
-    [hairColor] => 
+    [name] => John
+    [age:Person:private] => 25
 )
+
 */
-
-echo $person->age;
-
-/*
-Result will be:
-
-20
-*/
-
-unset($person->age);
-
-/*
-Result will be:
-
-null
-*/
-echo $person->age;

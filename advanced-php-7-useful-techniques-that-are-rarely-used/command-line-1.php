@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Advanced PHP
+ * 7 PHP Features that are rarely used
  * Command line
- * http://ivopetkov.com/b/advanced-php/
+ * http://ivopetkov.com/
  * Copyright (c) 2016 Ivo Petkov
  * Free to use under the MIT license.
  */
