@@ -1,7 +1,7 @@
 /*
  * Responsively Lazy
  * http://ivopetkov.com/b/lazy-load-responsive-images/
- * Copyright 2015-2016, Ivo Petkov
+ * Copyright 2015-2017, Ivo Petkov
  * Free to use under the MIT license.
  */
 
@@ -97,27 +97,29 @@ var responsivelyLazy = (function () {
             bestSelectedOption = [element.getAttribute('src'), 999999];
         }
 
-        if (typeof container.lastSetOption === 'undefined') {
-            container.lastSetOption = ['', 0];
+        if (typeof container.responsivelyLazyLastSetOption === 'undefined') {
+            container.responsivelyLazyLastSetOption = ['', 0];
         }
-        if (container.lastSetOption[1] < bestSelectedOption[1]) {
-            var fireEvent = container.lastSetOption[1] === 0;
+        if (container.responsivelyLazyLastSetOption[1] < bestSelectedOption[1]) {
+            container.responsivelyLazyLastSetOption = bestSelectedOption;
             var url = bestSelectedOption[0];
-            var image = new Image();
-            image.addEventListener('load', function () {
-                element.setAttribute('srcset', url);
-                if (fireEvent) {
+            if (typeof container.responsivelyLazyEventsAttached === 'undefined') {
+                container.responsivelyLazyEventsAttached = true;
+                element.addEventListener('load', function () {
                     var handler = container.getAttribute('data-onlazyload');
                     if (handler !== null) {
                         (new Function(handler).bind(container))();
                     }
-                }
-            }, false);
-            image.addEventListener('error', function () {
-                container.lastSetOption = ['', 0];
-            }, false);
-            image.src = url;
-            container.lastSetOption = bestSelectedOption;
+                }, false);
+                element.addEventListener('error', function () {
+                    container.responsivelyLazyLastSetOption = ['', 0];
+                }, false);
+            }
+            if (url === element.getAttribute('src')) {
+                element.removeAttribute('srcset');
+            } else {
+                element.setAttribute('srcset', url);
+            }
         }
     };
 
@@ -149,6 +151,22 @@ var responsivelyLazy = (function () {
         image.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEADMDOJaQAA3AA/uuuAAA=';
         image.onload = image.onerror = function () {
             hasWebPSupport = image.width === 2;
+
+            var requestAnimationFrameFunction = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+
+            var hasChange = true;
+            var runIfHasChange = function () {
+                if (hasChange) {
+                    hasChange = false;
+                    run();
+                }
+                requestAnimationFrameFunction.call(null, runIfHasChange);
+            };
+
+            runIfHasChange();
+
             if (hasIntersectionObserverSupport) {
 
                 var updateIntersectionObservers = function () {
@@ -180,86 +198,62 @@ var responsivelyLazy = (function () {
                     }
                 });
 
-                run();
-
-            } else {
-
-                var requestAnimationFrameFunction = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
-
-                var hasChange = true;
-                var runIfHasChange = function () {
-                    if (hasChange) {
-                        hasChange = false;
-                        run();
-                    }
-                    requestAnimationFrameFunction.call(null, runIfHasChange);
-                };
-
-                var setChanged = function () {
-                    hasChange = true;
-                };
-
-                var updateParentNodesScrollListeners = function () {
-                    var elements = document.querySelectorAll('.responsively-lazy');
-                    var elementsCount = elements.length;
-                    for (var i = 0; i < elementsCount; i++) {
-                        var parentNode = elements[i].parentNode;
-                        while (parentNode && parentNode.tagName.toLowerCase() !== 'html') {
-                            if (typeof parentNode.responsivelyLazyScrollAttached === 'undefined') {
-                                parentNode.responsivelyLazyScrollAttached = true;
-                                parentNode.addEventListener('scroll', setChanged);
-                            }
-                            parentNode = parentNode.parentNode;
-                        }
-                    }
-                };
-
-                runIfHasChange();
+                var changeTimeout = null;
 
             }
 
-            var attachEvents = function () {
+            var setChanged = function () {
                 if (hasIntersectionObserverSupport) {
-                    var resizeTimeout = null;
+                    window.clearTimeout(changeTimeout);
+                    changeTimeout = window.setTimeout(function () {
+                        hasChange = true;
+                    }, 300);
+                } else {
+                    hasChange = true;
                 }
+            };
+
+            var updateParentNodesScrollListeners = function () {
+                var elements = document.querySelectorAll('.responsively-lazy');
+                var elementsCount = elements.length;
+                for (var i = 0; i < elementsCount; i++) {
+                    var parentNode = elements[i].parentNode;
+                    while (parentNode && parentNode.tagName.toLowerCase() !== 'html') {
+                        if (typeof parentNode.responsivelyLazyScrollAttached === 'undefined') {
+                            parentNode.responsivelyLazyScrollAttached = true;
+                            parentNode.addEventListener('scroll', setChanged);
+                        }
+                        parentNode = parentNode.parentNode;
+                    }
+                }
+            };
+
+            var initialize = function () {
                 window.addEventListener('resize', function () {
                     updateWindowSize();
-                    if (hasIntersectionObserverSupport) {
-                        window.clearTimeout(resizeTimeout);
-                        resizeTimeout = window.setTimeout(function () {
-                            run();
-                        }, 300);
-                    } else {
-                        setChanged();
-                    }
+                    setChanged();
                 });
+                window.addEventListener('scroll', setChanged);
+                window.addEventListener('load', setChanged);
                 if (hasIntersectionObserverSupport) {
-                    window.addEventListener('load', run);
                     updateIntersectionObservers();
-                } else {
-                    window.addEventListener('scroll', setChanged);
-                    window.addEventListener('load', setChanged);
-                    updateParentNodesScrollListeners();
                 }
+                updateParentNodesScrollListeners();
                 if (typeof MutationObserver !== 'undefined') {
                     var observer = new MutationObserver(function () {
                         if (hasIntersectionObserverSupport) {
                             updateIntersectionObservers();
-                            run();
-                        } else {
-                            updateParentNodesScrollListeners();
-                            setChanged();
                         }
+                        updateParentNodesScrollListeners();
+                        setChanged();
                     });
                     observer.observe(document.querySelector('body'), {childList: true, subtree: true});
                 }
             };
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', attachEvents);
+                document.addEventListener('DOMContentLoaded', initialize);
             } else {
-                attachEvents();
+                initialize();
             }
         };
     }
