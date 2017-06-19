@@ -133,11 +133,24 @@
         </div>
 
         <div class="example-title">Hidden (must call responsivelyLazy.run())</div>
-        <div class="example-title"><button onclick="this.parentNode.nextSibling.style.display='block';responsivelyLazy.run();">Show image</button></div><div class="example-image" style="display:none;">
+        <div class="example-title"><button onclick="this.parentNode.nextSibling.style.display = 'block';responsivelyLazy.run();">Show image</button></div><div class="example-image" style="display:none;">
             <div class="responsively-lazy" style="padding-bottom:68.44%;">
                 <img alt="reponsivelyLazy demo image" src="images/2500.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      data-srcset="images/400.jpg 400w, images/400.webp 400w, images/600.jpg 600w, images/600.webp 600w, images/800.jpg 800w, images/800.webp 800w, images/1000.jpg 1000w, images/1000.webp 1000w, images/1500.jpg 1500w, images/1500.webp 1500w, images/2000.jpg 2000w, images/2000.webp 2000w"
                      />
+            </div>
+        </div>
+
+        <div class="example-title">Lazy (non-image) content</div>
+        <div class="example-image">
+            <script>
+                executeLazyContentJs = function () {
+                    window.setTimeout(function () {
+                        document.getElementById('lazy-content').firstChild.innerHTML += ' ... that contains JavaScript';
+                    }, 1000);
+                };
+            </script>
+            <div class="responsively-lazy" id="lazy-content" style="padding-bottom:200px;" data-lazycontent="<div style=&quot;background-color:#1380BA;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Arial;font-size:15px;line-height:25px;height:200px;&quot;>Lazy loaded content</div><script>executeLazyContentJs();</script>">
             </div>
         </div>
 
