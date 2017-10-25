@@ -70,7 +70,7 @@ var UIBot = function (config) {
         };
     };
 
-    var getMatchingCssRules = function (pseudo) {
+    var getCSSRules = function (pseudo) {
         var result = [];
         var styleSheets = document.styleSheets;
         var styleSheetsLength = styleSheets.length;
@@ -124,16 +124,24 @@ var UIBot = function (config) {
         return className;
     };
 
-    var isPointerInside = function (element) {
-        var position = getElementPosition(pointer); // todo cache for positionCheck()
-        var x = position.x;
-        var y = position.y;
-        var position = getElementPosition(element);
-        var elementX = position.x;
-        var elementY = position.y;
-        var elementWidth = position.width;
-        var elementHeight = position.height;
-        return elementX <= x && x <= elementX + elementWidth && elementY <= y && y <= elementY + elementHeight;
+    var getElementsUnderPointer = function (parentsOnly) {
+        if (typeof parentsOnly === 'undefined') {
+            parentsOnly = false;
+        }
+        var position = getElementPosition(pointer);
+        var result = [];
+        var elements = document.elementsFromPoint(position.x, position.y);
+        var elementsLength = elements.length;
+        for (var i = 0; i < elementsLength; i++) {
+            var element = elements[i];
+            if (element !== pointer) {
+                result.push(element);
+                if (parentsOnly && element === document.body) {
+                    break;
+                }
+            }
+        }
+        return result;
     };
 
     var setPointerPosition = function (x, y, next) {
@@ -183,28 +191,23 @@ var UIBot = function (config) {
                 clientY: position.y
             }));
         }
-        var matchingCssRules = getMatchingCssRules('active');
-        document.querySelectorAll('*').forEach(function (element) {
-            if (element === pointer) {
-                return;
+        var activeCSSRules = getCSSRules('active');
+        var elementsUnderPointer = getElementsUnderPointer(true);
+        elementsUnderPointer.forEach(function (element) {
+            var addedClassNames = [];
+            for (var i in activeCSSRules) {
+                if (activeCSSRules[i].elements.indexOf(element) !== -1) {
+                    var className = getClassNameForCssText(activeCSSRules[i].cssText);
+                    element.classList.add(className);
+                    addedClassNames.push(className);
+                }
             }
-            if (isPointerInside(element)) {
-                var position = getElementPosition(pointer);
-                var addedClassNames = [];
-                for (var i in matchingCssRules) {
-                    if (matchingCssRules[i].elements.indexOf(element) !== -1) {
-                        var className = getClassNameForCssText(matchingCssRules[i].cssText);
-                        element.classList.add(className);
-                        addedClassNames.push(className);
-                    }
-                }
-                if (addedClassNames.length > 0) {
-                    window.setTimeout(function () {
-                        addedClassNames.forEach(function (className) {
-                            element.classList.remove(className);
-                        });
-                    }, 150 * slowdown);
-                }
+            if (addedClassNames.length > 0) {
+                window.setTimeout(function () {
+                    addedClassNames.forEach(function (className) {
+                        element.classList.remove(className);
+                    });
+                }, 150 * slowdown);
             }
         });
     };
@@ -217,47 +220,36 @@ var UIBot = function (config) {
     var start = function () {
         window.setTimeout(function () {
 
-            var overElements = [];
+            var hoveredElements = [];
             var positionCheck = function () {
-                var elementsToOver = [];
-                var elementsToOut = [];
-                document.querySelectorAll('*').forEach(function (element) {
-                    if (element === pointer) {
-                        return;
-                    }
-                    var isInside = isPointerInside(element);
-                    var elementIndex = overElements.indexOf(element);
-                    if (isInside && elementIndex === -1) {
-                        elementsToOver.push(element);
-                    } else if (!isInside && elementIndex !== -1) {
-                        elementsToOut.push(element);
-                    }
-                });
-
-                if (elementsToOver.length > 0) {
-                    var matchingCssRules = getMatchingCssRules('hover');
-                    elementsToOver.forEach(function (element) {
-                        overElements.push(element);
-                        for (var i in matchingCssRules) {
-                            if (matchingCssRules[i].elements.indexOf(element) !== -1) {
-                                var className = getClassNameForCssText(matchingCssRules[i].cssText);
+                var hoverCSSRules = null;
+                var elementsUnderPointer = getElementsUnderPointer(true);
+                elementsUnderPointer.forEach(function (element) {
+                    if (hoveredElements.indexOf(element) === -1) {
+                        if (hoverCSSRules === null) {
+                            hoverCSSRules = getCSSRules('hover');
+                        }
+                        hoveredElements.push(element);
+                        for (var i in hoverCSSRules) {
+                            if (hoverCSSRules[i].elements.indexOf(element) !== -1) {
+                                var className = getClassNameForCssText(hoverCSSRules[i].cssText);
                                 element.classList.add(className);
                             }
                         }
                         element.dispatchEvent(new Event('mouseover'));
-                    });
-                }
-                if (elementsToOut.length > 0) {
-                    elementsToOut.forEach(function (element) {
-                        overElements.splice(overElements.indexOf(element), 1);
-                        element.classList.forEach(function (className) {
+                    }
+                });
+                hoveredElements.forEach(function (overElement) {
+                    if (elementsUnderPointer.indexOf(overElement) === -1) {
+                        hoveredElements.splice(hoveredElements.indexOf(overElement), 1);
+                        overElement.classList.forEach(function (className) {
                             if (className.indexOf('uibot-generated-class-') === 0) {
-                                element.classList.remove(className);
+                                overElement.classList.remove(className);
                             }
                         });
-                        element.dispatchEvent(new Event('mouseout'));
-                    });
-                }
+                        overElement.dispatchEvent(new Event('mouseout'));
+                    }
+                });
                 if (!done) {
                     window.setTimeout(positionCheck, 16 * slowdown);
                 }
@@ -290,22 +282,46 @@ var UIBot = function (config) {
                     setPointerPosition(x, y, next);
                 } else if (action.type === 'click') {
                     showPointerClick(next);
-                    window.setTimeout(function () {
-                        click();
-                    }, 50 * slowdown);
+                    click();
                 } else if (action.type === 'wait') {
                     var seconds = getCurrentValue(action.seconds);
                     window.setTimeout(next, seconds * 1000 * slowdown);
                 } else if (action.type === 'moveToElement') {
                     var element = getCurrentValue(action.element);
-                    if (isPointerInside(element)) {
+                    var elementsUnderPointer = getElementsUnderPointer();
+                    if (elementsUnderPointer.indexOf(element) !== -1) {
                         next();
                     } else {
+                        var pointerPosition = getElementPosition(pointer);
                         var elementPosition = getElementPosition(element);
                         var x = elementPosition.x;
                         var y = elementPosition.y;
-                        x += 10;
-                        y += 10;
+                        var offsetX = Math.min(Math.max(elementPosition.width / 5, 17), elementPosition.width / 2);
+                        var offsetY = Math.min(Math.max(elementPosition.height / 5, 17), elementPosition.height / 2);
+
+                        var isLeft = pointerPosition.x <= elementPosition.x;
+                        var isRight = pointerPosition.x >= elementPosition.x + elementPosition.width;
+                        var isTop = pointerPosition.y < elementPosition.y;
+
+                        if (isLeft || isRight) {
+                            x += isLeft ? offsetX : elementPosition.width - offsetX;
+                            if (pointerPosition.y <= elementPosition.y) { // top
+                                y += offsetY;
+                            } else if (pointerPosition.y >= elementPosition.y + elementPosition.height) { // bottom
+                                y += elementPosition.height - offsetY;
+                            } else {
+                                y = Math.min(Math.max(pointerPosition.y, elementPosition.y + offsetY), elementPosition.y + elementPosition.height - offsetY);
+                            }
+                        } else {
+                            y += isTop ? offsetY : elementPosition.height - offsetY;
+                            if (pointerPosition.x <= elementPosition.x) { // top
+                                x += offsetX;
+                            } else if (pointerPosition.x >= elementPosition.x + elementPosition.width) { // bottom
+                                x += elementPosition.width - offsetX;
+                            } else {
+                                x = Math.min(Math.max(pointerPosition.x, elementPosition.x + offsetX), elementPosition.x + elementPosition.width - offsetX);
+                            }
+                        }
                         setPointerPosition(x, y, next);
                     }
 //            } else if (action.type === 'clickElement') {
