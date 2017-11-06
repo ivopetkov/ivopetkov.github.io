@@ -353,46 +353,47 @@ var UIBot = function (config) {
             pointer = document.createElement('div');
             pointer.setAttribute('class', 'ui-bot-pointer-' + styleID);
             document.body.appendChild(pointer);
-            var bodyInformation = getElementInformation(document.body);
-            setPointerPosition(100 - bodyInformation.x, 100 - bodyInformation.y, null, 0);
-
-            var hoveredElements = [];
-            var update = function () {
-                var hoverCSSRules = null;
-                var elementsUnderPointer = getElementsUnderPointer(true);
-                elementsUnderPointer.forEach(function (element) {
-                    if (hoveredElements.indexOf(element) === -1) {
-                        if (hoverCSSRules === null) {
-                            hoverCSSRules = getCSSRules('hover');
-                        }
-                        hoveredElements.push(element);
-                        for (var i in hoverCSSRules) {
-                            if (hoverCSSRules[i].elements.indexOf(element) !== -1) {
-                                var className = getClassNameForCssText(hoverCSSRules[i].cssText);
-                                element.classList.add(className);
+            //var bodyInformation = getElementInformation(document.body);
+            setPointerPosition(100, 100, function () {// - bodyInformation.x  - bodyInformation.y
+                var hoveredElements = [];
+                var update = function () {
+                    var hoverCSSRules = null;
+                    var elementsUnderPointer = getElementsUnderPointer(true);
+                    elementsUnderPointer.forEach(function (element) {
+                        if (hoveredElements.indexOf(element) === -1) {
+                            if (hoverCSSRules === null) {
+                                hoverCSSRules = getCSSRules('hover');
                             }
-                        }
-                        element.dispatchEvent(new Event('mouseover'));
-                    }
-                });
-                hoveredElements.forEach(function (overElement) {
-                    if (elementsUnderPointer.indexOf(overElement) === -1) {
-                        hoveredElements.splice(hoveredElements.indexOf(overElement), 1);
-                        overElement.classList.forEach(function (className) {
-                            if (className.indexOf('uibot-generated-class-') === 0) {
-                                overElement.classList.remove(className);
+                            hoveredElements.push(element);
+                            for (var i in hoverCSSRules) {
+                                if (hoverCSSRules[i].elements.indexOf(element) !== -1) {
+                                    var className = getClassNameForCssText(hoverCSSRules[i].cssText);
+                                    element.classList.add(className);
+                                }
                             }
-                        });
-                        overElement.dispatchEvent(new Event('mouseout'));
+                            element.dispatchEvent(new Event('mouseover'));
+                        }
+                    });
+                    hoveredElements.forEach(function (overElement) {
+                        if (elementsUnderPointer.indexOf(overElement) === -1) {
+                            hoveredElements.splice(hoveredElements.indexOf(overElement), 1);
+                            overElement.classList.forEach(function (className) {
+                                if (className.indexOf('uibot-generated-class-') === 0) {
+                                    overElement.classList.remove(className);
+                                }
+                            });
+                            overElement.dispatchEvent(new Event('mouseout'));
+                        }
+                    });
+                    if (!done) {
+                        requestAnimationFrame(update);
                     }
-                });
-                if (!done) {
-                    requestAnimationFrame(update);
-                }
-            };
-            update();
+                };
+                update();
 
-            execute(0);
+                execute(0);
+            }, 0);
+
         }, startDelay * 1000);
     };
 
@@ -423,45 +424,61 @@ var UIBot = function (config) {
                     var seconds = getCurrentValue(action.seconds);
                     setTimeout(next, seconds * 1000 * slowdown);
                 } else if (action.type === 'moveToElement') {
-                    var element = getCurrentValue(action.element);
-                    var elementsUnderPointer = getElementsUnderPointer();
-                    if (elementsUnderPointer.indexOf(element) !== -1) {
-                        next();
-                    } else {
-                        scrollElementIntoView(element, function () {
-                            var pointerInformation = getElementInformation(pointer);
-                            var elementInformation = getElementInformation(element);
-                            var left = elementInformation.left;
-                            var top = elementInformation.top;
-                            var offsetLeft = Math.min(Math.max(elementInformation.width / 5, 17), elementInformation.width / 2);
-                            var offsetTop = Math.min(Math.max(elementInformation.height / 5, 17), elementInformation.height / 2);
+                    var moveTo = function (element) {
+                        var elementsUnderPointer = getElementsUnderPointer();
+                        if (elementsUnderPointer.indexOf(element) !== -1) {
+                            next();
+                        } else {
+                            scrollElementIntoView(element, function () {
+                                var pointerInformation = getElementInformation(pointer);
+                                var elementInformation = getElementInformation(element);
+                                var left = elementInformation.left;
+                                var top = elementInformation.top;
+                                var offsetLeft = Math.min(Math.max(elementInformation.width / 5, 17), elementInformation.width / 2);
+                                var offsetTop = Math.min(Math.max(elementInformation.height / 5, 17), elementInformation.height / 2);
 
-                            var isLeft = pointerInformation.left <= elementInformation.left;
-                            var isRight = pointerInformation.left >= elementInformation.left + elementInformation.width;
-                            var isTop = pointerInformation.top < elementInformation.top;
+                                var isLeft = pointerInformation.left <= elementInformation.left;
+                                var isRight = pointerInformation.left >= elementInformation.left + elementInformation.width;
+                                var isTop = pointerInformation.top < elementInformation.top;
 
-                            if (isLeft || isRight) {
-                                left += isLeft ? offsetLeft : elementInformation.width - offsetLeft;
-                                if (pointerInformation.top <= elementInformation.top) { // top
-                                    top += offsetTop;
-                                } else if (pointerInformation.top >= elementInformation.top + elementInformation.height) { // bottom
-                                    top += elementInformation.height - offsetTop;
+                                if (isLeft || isRight) {
+                                    left += isLeft ? offsetLeft : elementInformation.width - offsetLeft;
+                                    if (pointerInformation.top <= elementInformation.top) { // top
+                                        top += offsetTop;
+                                    } else if (pointerInformation.top >= elementInformation.top + elementInformation.height) { // bottom
+                                        top += elementInformation.height - offsetTop;
+                                    } else {
+                                        top = Math.min(Math.max(pointerInformation.top, elementInformation.top + offsetTop), elementInformation.top + elementInformation.height - offsetTop);
+                                    }
                                 } else {
-                                    top = Math.min(Math.max(pointerInformation.top, elementInformation.top + offsetTop), elementInformation.top + elementInformation.height - offsetTop);
+                                    top += isTop ? offsetTop : elementInformation.height - offsetTop;
+                                    if (pointerInformation.left <= elementInformation.left) { // top
+                                        left += offsetLeft;
+                                    } else if (pointerInformation.left >= elementInformation.left + elementInformation.width) { // bottom
+                                        left += elementInformation.width - offsetLeft;
+                                    } else {
+                                        left = Math.min(Math.max(pointerInformation.left, elementInformation.left + offsetLeft), elementInformation.left + elementInformation.width - offsetLeft);
+                                    }
                                 }
+                                setPointerPosition(left, top, next);
+                            });
+                        }
+                    };
+                    var triesCount = 0;
+                    var tryMove = function () {
+                        var element = getCurrentValue(action.element);
+                        if (element === null) {
+                            triesCount++;
+                            if (triesCount > 10 * 30) {
+                                throw 'Cannot find element for action ' + index + '.';
                             } else {
-                                top += isTop ? offsetTop : elementInformation.height - offsetTop;
-                                if (pointerInformation.left <= elementInformation.left) { // top
-                                    left += offsetLeft;
-                                } else if (pointerInformation.left >= elementInformation.left + elementInformation.width) { // bottom
-                                    left += elementInformation.width - offsetLeft;
-                                } else {
-                                    left = Math.min(Math.max(pointerInformation.left, elementInformation.left + offsetLeft), elementInformation.left + elementInformation.width - offsetLeft);
-                                }
+                                setTimeout(tryMove, 100);
                             }
-                            setPointerPosition(left, top, next);
-                        });
-                    }
+                        } else {
+                            moveTo(element);
+                        }
+                    };
+                    tryMove();
 //            } else if (action.type === 'clickElement') {
 //                var element = getCurrentValue(action.element);
 //                showPointerClick(next);
