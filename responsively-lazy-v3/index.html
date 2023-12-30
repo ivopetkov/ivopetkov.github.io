@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,minimal-ui">
+    <title>Responsively Lazy examples</title>
+    <meta name="description" content="Responsively Lazy v3 examples">
+    <meta name="author" content="ivopetkov.com">
+    <script async src="responsively-lazy.min.js"></script>
+    <style>
+        body {
+            padding: 20px;
+            padding-bottom: 0;
+            line-height: 180%;
+            background-color: #f5f5f5;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 45px;
+            line-height: 120%;
+            padding-top: 30px;
+            max-width: 490px;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            line-height: 120%;
+            padding-top: 40px;
+            max-width: 490px;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .info {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            font-size: 15px;
+        }
+
+        .example-title {
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .example-content {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 3px;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            line-height: 0;
+        }
+
+        [data-responsively-lazy-type="html"] {
+            line-height: 100%;
+        }
+
+        .example-content.loading:before {
+            content: "Loading...";
+            background-color: #1380BA;
+            display: inline-block;
+            padding: 20px 15px;
+            z-index: 100;
+            position: absolute;
+            font-size: 14px;
+            color: #fff;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        .example-content.loaded:before {
+            content: "Loaded";
+            background-color: #5BAD0E;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Responsively Lazy v3 examples</h1>
+
+    <div class="info">
+        More information about the JavaScript library is available at<br>
+        <a style="color:#000;text-decoration:underline;"
+            href="https://ivopetkov.com/responsively-lazy/">https://ivopetkov.com/responsively-lazy/</a>
+    </div>
+
+    <h2>Lazy load images</h2>
+
+    <div class="info">In the examples bellow you'll find multiple div tags with various sizes. When the image inside
+        each div becomes visible on the screen, the best version is selected and loaded. The available versions widths
+        are 500px, 800px, 1500px and 2500px. You can easily see which version is loaded via the text inside the image.
+    </div>
+
+    <div class="example-title">max-width: 400px</div>
+    <div class="example-content" style="max-width:400px;">
+        <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+            srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+    </div>
+
+    <div class="example-title">data-responsively-lazy-threshold=500px</div>
+    <div class="example-content" style="max-width:800px;">
+        <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+            srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w"
+            data-responsively-lazy-threshold="500px" />
+    </div>
+
+    <div class="example-title">data-responsively-lazy-threshold=50%</div>
+    <div class="example-content" style="max-width:800px;">
+        <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+            srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w"
+            data-responsively-lazy-threshold="50%" />
+    </div>
+
+    <div class="example-title">data-responsively-lazy-type=background</div>
+    <div class="example-content" style="max-width:500px;">
+        <div style="width:100%;aspect-ratio:500/353;background-size:cover;"
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w"
+            data-responsively-lazy-type="background">
+        </div>
+    </div>
+
+    <div class="example-title">With data-on-responsively-lazy-load</div>
+    <div class="example-content loading">
+        <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+            srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w"
+            data-on-responsively-lazy-load="this.parentNode.className+=' loaded';" />
+    </div>
+
+    <div class="example-title">With "responsively-lazy-load" event handler</div>
+    <div class="example-content loading">
+        <img id="image1" src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+            srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        <script>
+            document.getElementById("image1").addEventListener('responsively-lazy-load', function () {
+                this.parentNode.className += ' loaded';
+            })
+        </script>
+    </div>
+
+    <div class="example-title">max-width: 500px (no aspect-ratio specified)</div>
+    <div class="example-content" style="max-width:500px;">
+        <img src="images/2500.jpg" style="width:100%;"
+            srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+    </div>
+
+    <div class="example-title">In scrollable element</div>
+    <div class="example-content" style="overflow:auto;display:flex;">
+        <div style="width:500px;flex:none;padding-right:5px;">
+            <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+                srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        </div>
+        <div style="width:500px;flex:none;padding-right:5px;">
+            <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+                srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        </div>
+        <div style="width:500px;flex:none;padding-right:5px;">
+            <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+                srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        </div>
+        <div style="width:500px;flex:none;padding-right:5px;">
+            <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+                srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        </div>
+        <div style="width:500px;flex:none;">
+            <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+                srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        </div>
+    </div>
+
+    <div class="example-title">Hidden (must call responsivelyLazy.run())</div>
+    <div>
+        <div class="example-title"><button
+                onclick="this.parentNode.parentNode.querySelector('.example-content').style.display = 'block';responsivelyLazy.run();">Show
+                image</button>
+        </div>
+        <div class="example-content" style="display:none;">
+            <img src="images/2500.jpg" style="width:100%;aspect-ratio:500/353;"
+                srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-responsively-lazy="images/500.avif 500w avif, images/500.webp 500w webp, images/500.jpg 500w, images/800.avif 800w avif, images/800.webp 800w webp, images/800.jpg 800w, images/1500.avif 1500w avif, images/1500.webp 1500w webp, images/1500.jpg 1500w, images/2500.avif 2500w avif, images/2500.webp 2500w webp, images/2500.jpg 2500w" />
+        </div>
+    </div>
+
+    <h2>Lazy load HTML</h2>
+
+    <div class="info">Add data-responsively-lazy-type=html to tell the library that the value in
+        data-responsively-lazy is HTML.
+    </div>
+
+    <div class="example-title">Simple example</div>
+    <div class="example-content" style="max-width:500px;">
+        <div data-responsively-lazy="hello world" data-responsively-lazy-type="html">
+        </div>
+    </div>
+
+    <div class="example-title">HTML with JavaScript code inside</div>
+    <div class="example-content">
+        <script>
+            executeLazyContentJs = function () {
+                window.setTimeout(function () {
+                    document.getElementById('lazy-content').firstChild.innerHTML += ' ... that contains JavaScript';
+                }, 1000);
+            };
+        </script>
+        <div id="lazy-content"
+            data-responsively-lazy="<div style=&quot;background-color:#1380BA;color:#fff;text-align:center;padding:0 20px;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:25px;height:200px;&quot;>Lazy loaded content</div><script>executeLazyContentJs();</script>"
+            data-responsively-lazy-type="html">
+        </div>
+    </div>
+
+    <div style="max-width:600px;margin:0 auto;text-align:center;padding-bottom:60px;padding-top:40px;font-size:15px;">
+        <a style="color:#000;text-decoration:underline;"
+            href="https://github.com/ivopetkov/ivopetkov.github.io/tree/master/responsively-lazy-v3/">View source at GitHub</a>
+    </div>
+
+</body>
+
+</html>
